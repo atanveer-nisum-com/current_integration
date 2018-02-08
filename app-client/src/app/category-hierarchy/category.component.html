@@ -1,0 +1,30 @@
+<div class="panel-group category-products" id="accordian">
+    <ng-container *ngFor = "let category of categories">
+    <div class="panel panel-default" >
+        <ng-container *ngIf = "category.subCategories.length > 0">
+                <div class="panel-heading" >
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#{{category.parentCategory.name | removespace}}">
+                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                            {{category.parentCategory.name}}
+                        </a>
+                    </h4>
+                </div>
+                <div id="{{category.parentCategory.name | removespace}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            <li *ngFor = "let child of category.subCategories"><a [routerLink]="['category',child.id]" routerLinkActive="active">{{child.name}} </a></li>
+                        </ul>
+                    </div>
+                </div>
+        </ng-container>
+        <div *ngIf = "category.subCategories.length === 0">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a href="javascript:void(0);">{{category.parentCategory.name}}</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+</div>

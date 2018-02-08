@@ -1,0 +1,11 @@
+input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.default-address {
+  font-weight: bold;
+}
+
+/* [ngClass]="{'default-highliter': (address.isDefault == 1)}"  */

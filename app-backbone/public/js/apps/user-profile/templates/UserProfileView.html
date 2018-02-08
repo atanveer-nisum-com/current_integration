@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <br/>
+            <div class="list-group">
+                <a href="/userprofile" class="list-group-item">Profile</a>
+                <a href="/userprofile/addressbook" class="list-group-item">Address Book</a>
+                <a href="/wishlists" class="list-group-item">Wishlists</a>
+                <a href="/userprofile/orderhistory" class="list-group-item">Order History</a>
+                <a href="/userprofile/paymentoptions" class="list-group-item">Payment Options</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="general-form" id="changeProfile">
+                <h2>User Profile</h2>
+                <form id="myform">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="firstName" value="{{firstName}}"
+                               placeholder="First Name" required>
+                        <small id="errorfirstName" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="lastName" value="{{lastName}}"
+                               placeholder="Last Name" required>
+                        <small id="errorlastName" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="emailAddress" value="{{emailAddress}}"
+                               placeholder="Email Address" required>
+                        <small id="erroremailAddress" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        {{#each addresses}}
+                            <input type="text" name="addressLine1" value="{{addressLine1}}" placeholder="Address Line 1"
+                                   required>
+                            <small id="erroraddress1" class="text-danger"></small>
+                        {{/each}}
+                    </div class="form-group">
+
+                    <div class="form-group">
+                        {{#each addresses}}
+                            <input type="text" name="addressLine2" value="{{addressLine2}}" placeholder="Address Line 2"
+                                   required>
+                            <small id="erroraddress2" class="text-danger"></small>
+                        {{/each}}
+                    </div>
+
+                    <div class="form-group">
+                        <div id="countryList"></div>
+                        <small id="errorcountry" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group hidden" id="stateDiv">
+                        <div id="stateList"></div>
+                        <small id="errorstate" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="city" value="{{addresses.[0].city}}" placeholder="Enter your City"
+                               required>
+                        <small id="errorcity" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="zipcode" value="{{addresses.[0].zipcode}}" placeholder="Zip Code"
+                               required>
+                        <small id="errorzipcode" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phoneNumber" value="{{addresses.[0].phoneNumber}}"
+                               placeholder="Phone Number" required>
+                        <small id="errorphoneNumber" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="currentPassword" placeholder="Current Password">
+                        <small id="errorcurrentPassword" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="newPassword" placeholder="New Password">
+                        <small id="errornewPassword" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="confirmPassword" placeholder="Confirm New Password">
+                        <small id="errorconfirmPassword" class="text-danger"></small>
+                    </div>
+                    <button id="update" type="button" class="btn btn-default">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

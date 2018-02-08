@@ -1,0 +1,40 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="chose_area_box">
+                    <h3>Order history</h3>
+                    <br/>
+                    <div class="row ">
+                        <div class="col-sm-4">
+                            <track-order (orders)="getOrders($event)"></track-order>
+                        </div>
+                        <div class="col-sm-4">
+                            <date-range-picker (orders)="getOrders($event)"></date-range-picker>
+                        </div>
+                        <div class="col-sm-4">
+                            <order-filter (orders)="getOrders($event)"></order-filter>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cart_items">
+    <div class="container">
+        <div *ngIf="orders?.length > 0; else elseBlock">
+            <div *ngFor="let order of orders"  infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+                <order-history-list [order]="order"></order-history-list> 
+             </div>
+        </div> 
+        <ng-template #elseBlock>
+            <div class="cart-empty">
+                <div class="empty-cart-icon"></div>
+                <div class="empty-cart-message">You have'nt ordered anything yet.</div>
+                <a class="empty-wishlist-link" routerLink="/">Start Shopping</a>
+            </div>
+        </ng-template> 
+    </div>
+</section>

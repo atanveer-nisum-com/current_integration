@@ -1,0 +1,24 @@
+{
+  "name": "Ecommerce Training Application",
+  "homepage": "index.html",
+  "authors": [
+    "Nisum ETA <nisum.eta@gmail.com>"
+  ],
+  "description": "Spring Boot and Backbone.js integeration",
+  "main": "app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "js/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone-amd": "~1",
+    "jquery": "~3",
+    "lodash": "~1",
+    "underscore-amd": "~1",
+	"requirejs": "~2"
+  }
+}

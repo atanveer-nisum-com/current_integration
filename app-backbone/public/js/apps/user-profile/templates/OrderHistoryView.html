@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <br/>
+            <div class="list-group">
+                <a href="/userprofile" class="list-group-item">Profile</a>
+                <a href="/userprofile/addressbook" class="list-group-item">Address Book</a>
+                <a href="/wishlists" class="list-group-item">Wishlists</a>
+                <a href="/userprofile/orderhistory" class="list-group-item">Order History</a>
+                <a href="/userprofile/paymentoptions" class="list-group-item">Payment Options</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="general-form">
+                <h2>Order History</h2>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    {{#each this}}
+                    <div class="panel {{order-status status.code}}">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse"
+                                   data-parent="#accordion"
+                                   data-target="#{{id}}" aria-expanded="false" aria-controls="collapseThree">
+                                    Order #{{id}}
+
+                                    <span class="pull-right">Total: ${{total}}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="{{id}}" class="panel-collapse collapse " role="tabpanel"
+                             aria-labelledby="headingThree">
+
+
+                            <div class="panel-body">
+                                <h3>Products
+                                    <span class="pull-right order-status" style="font-size: 12px;font-weight: normal;">Status: {{status.message}}</span>
+                                </h3>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each items}}
+                                    <tr>
+                                        <th scope="row">{{inc @index}}</th>
+                                        <td>{{name}}</td>
+                                        <td> {{price}}</td>
+                                        <td>{{quantity}}</td>
+                                    </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+
+                                <h3>Shipping Details</h3>
+                                <ul>
+                                    <li>Address Line 1 : {{shipping.addressLine1}}</li>
+                                    <li>Address Line 2 : {{shipping.addressLine2}}</li>
+                                    <li>Country : {{shipping.country}}</li>
+                                    <li>State : {{shipping.state}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

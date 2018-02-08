@@ -1,0 +1,100 @@
+<div class="col-sm-4 col-sm-offset-1 signup-form">
+        <h2>New User Signup!</h2>
+        <form action="##">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>                                               
+                    <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName">
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>                                                
+                    <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName">                        
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">  
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>                        
+                    <input type="email" id="emailAddress" class="form-control" placeholder="Email Address" required="required" name="emailAddress">
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
+                    <input type="password" id="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" name="confirmPassword">
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>                                                
+                    <input type="text" id="addressLine1" class="form-control" placeholder="Address Line 1" name="addressLine1">      
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-address-card"></i></span>                                                
+                    <input type="text" id="addressLine2" class="form-control" placeholder="Address Line 2" name="addressLine2">   
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-flag"></i></span>                                            
+                    <select id="country" class="form-control" name="country">
+                        <option value="" selected disabled hidden>Select Country</option>
+                        {{#each countryModel}}
+                            <option value = "{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <small class="text-danger"></small>                                
+            </div>
+            <div class="form-group hidden" id="stateDivision">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-flag-o"></i></span>                                            
+                    <select id="state" class="form-control" name="state">
+                        <option value="" selected disabled hidden>Select State</option>
+                        {{#each stateModel}}
+                        <option value = "{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <small class="text-danger"></small>                                
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-building"></i></span>                                                
+                    <input type="text" id="city" class="form-control" placeholder="Enter your City" name="city">
+                </div>
+                <small class="text-danger"></small>                
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-map-pin"></i></span>                                                
+                    <input type="text" id="zipcode" class="form-control" placeholder="Postal Code" name="zipcode">
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>                                                
+                    <input type="text" id="phoneNumber" class="form-control" placeholder="Phone Number" name="phoneNumber">  
+                </div>
+                <small class="text-danger"></small>
+            </div>
+            <button type="button" id="submit" class="btn btn-default">Signup</button>
+        </form>
+</div>

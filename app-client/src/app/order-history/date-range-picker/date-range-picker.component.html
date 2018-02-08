@@ -1,0 +1,6 @@
+<p>View orders placed within selected dates</p>
+<form [formGroup]="myForm" novalidate>
+  <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions" (dateRangeChanged)="onDateRangeChanged($event)"
+    formControlName="myDateRange"></my-date-range-picker>
+  <!-- other controls are here... -->
+</form>

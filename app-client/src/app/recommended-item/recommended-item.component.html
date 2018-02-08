@@ -1,0 +1,26 @@
+<div class="recommended_items">
+	<!--recommended_items-->
+	<h2 class="title text-center">recommended items</h2>
+	<carousel [interval]="5000" [noWrap]="false">
+		<slide *ngFor="let slide of slides; let index=index">
+			<div class="col-sm-4" *ngFor="let product of slide">
+				<div class="product-image-wrapper">
+					<div class="single-products">
+						<div class="productinfo text-center">
+							<div (click) = "changeName(product.item.name)" style="cursor: pointer;">
+							<!-- <a [routerLink]="['/product', changeName(product.item.name)]" routerLinkActive="active"> -->
+							<img src="{{product.item.itemImages[0].imagePath}}" alt="">
+							<h2>${{product.item.itemPrice[0].price}}</h2>
+							<p>{{product.item.name}}</p>
+							<!-- </a> -->
+							</div>
+							<!-- <a href="javascript:void(0);" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
+							<app-add-to-cart [itemid]="product.item.id" ></app-add-to-cart>
+						</div>
+					</div>
+					<app-wishlist [currentItem] = "product.item.id"></app-wishlist>
+				</div>
+			</div>
+		</slide>
+	</carousel>
+</div>

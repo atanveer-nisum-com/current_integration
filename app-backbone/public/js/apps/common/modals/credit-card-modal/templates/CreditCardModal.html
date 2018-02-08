@@ -1,0 +1,48 @@
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="CreditCardModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form action="##" id="addCardForm">
+                    <div class="form-group">
+
+                        <select class="form-control" name="paymentTypeId"
+                                id="paymentTypeId">
+                            {{#select paymentType.id}}
+                            <option value="3">Visa</option>
+                            <option value="2">Master card</option>
+                            <option value="4">American Express</option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="form-group" style="position: relative;">
+                        <input type="text" class="form-control" name="cardNumber" id="cardNumber"
+                               placeholder="Card Number" value="{{{cardNumber}}}" required>
+                        <small class="text-danger"></small>
+
+                    </div>
+                    <div>
+                        <div>
+                            <label for="isDefault">Use as default</label>
+                            <input type="checkbox" name="isDefault"
+                                   id="isDefault"
+                                   placeholder="Name On Card" {{bindAttr value="isDefault" }} {{checkDefault
+                                   isDefault}}>
+                            <small class="text-danger"></small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="close">Close</button>
+                <button type="button" class="btn btn-success" id="submit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

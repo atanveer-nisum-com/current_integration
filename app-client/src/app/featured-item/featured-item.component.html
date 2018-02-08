@@ -1,0 +1,35 @@
+<!--component html goes here -->
+<div class="features_items" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
+	<!--features_items-->
+	<h2 class="title text-center">Features Items</h2>
+	<div *ngFor="let featuredItem of featuredItems; trackBy: featuredItem?.id" class="col-sm-4 ">
+		<div class="product-image-wrapper">
+			<div class="single-products">
+				<div class="productinfo text-center">
+					<a [routerLink]="['/product', changeName(featuredItem.item.name)]" routerLinkActive="active">
+											<div *ngIf="featuredItem.item.itemImages.length > 0">
+												<div *ngFor="let image of featuredItem.item.itemImages">
+													<div *ngIf="image.isDefault === 1">
+														<img class="loading-image" src={{image.imagePath}} alt="" width="268" height="249"/>
+													</div>
+												</div>
+											</div>
+											<div *ngIf="featuredItem.item.itemImages.length === 0">
+												<img src="../../assets/images/home/default-image.jpg" alt="" width="268" height="249"/>
+											</div>
+											<h2>${{featuredItem.item.itemPrice[0].price}}</h2>
+											<p>{{featuredItem.item.name}}</p>
+											</a>
+					<div *ngIf="featuredItem.item.isBuyable === 1">
+						<!-- <a href="#" class="btn btn-default add-to-cart" (click)="onItemClick(featuredItem.item.id)" ><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
+						<app-add-to-cart [itemid]="featuredItem.item.id"></app-add-to-cart>
+					</div>
+					<div *ngIf="featuredItem.item.isBuyable === 0">
+						<p class="btn btn-danger add-to-cart"><i class="fa fa-shopping-cart"></i>Out of stock</p>
+					</div>
+				</div>
+			</div>
+			<app-wishlist [currentItem] = "featuredItem.item.id"></app-wishlist>
+		</div>
+	</div>
+</div>

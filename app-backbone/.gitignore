@@ -1,0 +1,11 @@
+node_modules/
+public/components
+.nyc_output
+.sass-cache
+package-lock.json
+.editorconfig
+*.iml
+.project
+.idea/*
+.settings/*
+.vscode/

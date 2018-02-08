@@ -1,0 +1,51 @@
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+
+            <div *ngFor="let wishlistData of wishListData">
+                <h4>{{wishlistData.name}}</h4>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item Image</td>
+                            <td class="description">Item Name</td>
+                            <td class="price">Price</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let wishList of wishlistItems">
+                            <td style="margin-bottom:-5px; margin-top:-5px" class="cart_product">
+                                <img src="{{wishList.item.itemImages[0].imagePath}}" width="12%">
+                            </td>
+                            <td style="margin-bottom:-5px; margin-top:-5px" class="cart_description">
+                                <p style="margin-bottom:-5px; margin-top:-5px"><a [routerLink]="['/product', changeName(wishList.item.name)]" routerLinkActive="active">{{wishList.item.name}}</a></p>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{wishList.item.itemPrice[0].price}}</p>
+                            </td>
+                            <td style="margin-bottom:-5px; margin-top:-5px">
+                                <a style="cursor: pointer; margin-bottom:-5px; margin-top:-5px;" class="cart_quantity_delete">
+                                    <div (click)="[removeFromList(wishList)]"><i class="fa fa-times"></i>Remove</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <div>
+    Wishlist Name : <input type="text" id="listName" />
+</div>
+
+<div>
+    Set As Default? : <input type="checkbox" id="isDefault" />
+</div>
+
+<div>
+
+</div>
+
+<input type=button value="Create Wishlist" onclick="createWishlist();"> -->

@@ -1,0 +1,114 @@
+version: "3"
+services:
+
+  mariadb:
+    build:
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: mariadb/Dockerfile
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=str0ng
+
+  cassandra:
+    build:
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: cassandra/Dockerfile
+    container_name: cassandra
+    ports:
+      - 9042:9042
+    restart: always
+
+
+  nginx:
+    build:
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: nginx/Dockerfile
+    container_name: nginx
+    depends_on:
+      - "appbackbone"
+      - "appfcc"
+      - "appshop"
+      - "appuser"
+      - "apppromotion"
+    ports:
+      - 80:80
+
+  appbackbone:
+    build:
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: app-backbone/Dockerfile
+    container_name: appbackbone
+    environment:
+      - HOST=appbackbone
+      - NODE_ENV=production
+    ports:
+      - 3000:3000
+    user: "node"
+    working_dir: /home/node/app
+    expose:
+      - "3000"
+    command: "npm start"
+
+  appfcc:
+    build: 
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: app-fcc/Dockerfile
+    depends_on:
+      - "cassandra"
+      - "apppromotion"
+    container_name: appfcc
+    ports:
+      - 8081:8081
+
+  appuser:
+    build: 
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: app-user/Dockerfile
+    depends_on:
+      - "appshop"
+    container_name: appuser
+    ports:
+      - 8082:8082
+
+  appshop:
+    build: 
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: app-shop/Dockerfile
+    depends_on:
+      - "mariadb"
+    container_name: appshop
+    ports:
+      - 8083:8083
+    
+  apppromotion:
+    build: 
+      context: /home/appdeployment/scripts/deploy
+      dockerfile: app-promotion/Dockerfile
+    depends_on:
+      - "appuser"
+    container_name: apppromotion
+    ports:
+      - 8084:8084
+
+  kafka:
+    image: wurstmeister/kafka
+    depends_on:
+      - "zookeeper"
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ADVERTISED_PORT=9092
+      - KAFKA_CREATE_TOPICS=ecommerceapp:1:1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+
+  zookeeper:
+    image: zookeeper
+    restart: always
+    container_name: zookeeper
+    ports:
+      - 2181:2181

@@ -1,0 +1,28 @@
+<div id="item" class="product-image-wrapper" data-id="{{this.item.id}}">
+    <div class="single-products">
+        <div id="product_center" class="productinfo text-center">
+            <a href="/products/{{this.id}}">
+                <img src="{{ this.item.defaultImage}}" alt="" id="image-check"/>
+
+                <h2 {{#if this.discount}}class="has-discount"{{/if}}>
+                    ${{this.item.itemPrice.0.price}}
+
+                    {{#if this.discount}}
+                        <span id="{{this.item.id}}" class="discount">${{this.discount}}</span>
+                    {{/if}}
+                </h2>
+                <p>{{this.item.name}}</p>
+
+                <br/>
+                <!--
+        <div style="color:#f00!important;" id="{{this.categoryName}}_{{this.item.id}}"></div> -->
+            </a>
+            <!-- <a class="btn btn-default add-to-cart" id="addItem"><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
+        </div>
+    </div>
+    <!-- <div class="choose">
+      <ul class="nav nav-pills nav-justified">
+        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+      </ul>
+    </div> -->
+</div>

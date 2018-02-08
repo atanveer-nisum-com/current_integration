@@ -1,0 +1,13 @@
+<div class="recommended_items">
+  <div (mouseenter)="pause()" (mouseleave)="play()" (mouseup)="play()" class="carousel slide">
+    <div class="carousel-inner">
+      <ng-content></ng-content>
+    </div>
+    <a class="left recommended-item-control" [class.disabled]="activeSlide === 0 && noWrap" (click)="previousSlide()" *ngIf="slides.length > 1">
+        <i class="fa fa-angle-left"></i>
+      </a>
+    <a class="right recommended-item-control" (click)="nextSlide()" [class.disabled]="isLast(activeSlide) && noWrap" *ngIf="slides.length > 1">
+        <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+</div>

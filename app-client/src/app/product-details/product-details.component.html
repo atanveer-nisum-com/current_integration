@@ -1,0 +1,28 @@
+<angular-loader></angular-loader>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Category</h2>
+                    <!--category-products start-->
+                    <category-list></category-list>
+                    <!--/category-products end-->
+
+                    <div class="shipping text-center">
+                        <!--shipping-->
+                        <img src="/assets/images/home/shipping.jpg" alt="" />
+                    </div>
+                    <!--/shipping-->
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="product-details">
+                    <app-product [itemName]="itemName"></app-product>
+                </div>
+                <app-recommended-item (itemName)="changeName($event)"></app-recommended-item>
+            </div>
+        </div>
+    </div>
+</section>

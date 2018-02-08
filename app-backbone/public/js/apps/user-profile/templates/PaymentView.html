@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <br/>
+            <div class="list-group">
+                <a href="/userprofile" class="list-group-item">Profile</a>
+                <a href="/userprofile/addressbook" class="list-group-item">Address Book</a>
+                <a href="/wishlists" class="list-group-item">Wishlists</a>
+                <a href="/userprofile/orderhistory" class="list-group-item">Order History</a>
+                <a href="/userprofile/paymentoptions" class="list-group-item">Payment Options</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="general-form">
+                <h2>Payment Options</h2>
+
+                <!-- Button trigger modals -->
+                <button type="button" class="btn btn-primary btn-lg" id="openModal">
+                    Add Card
+                </button>
+
+
+                <table class="table" id="displayCards">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Number</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each this}}
+                    {{#if this}}
+                    <tr id="{{id}}">
+                        <th>{{inc @index}}</th>
+                        <td>{{paymentType.name}}</td>
+                        <td>{{cardNumber}}</td>
+                        <td>
+                            <a href="javascript:void(0)" id="editCard"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="javascript:void(0)" id="removeCard"><i class="glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr>
+                    {{/if}}
+                    {{else}}
+                    <td>No Data</td>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

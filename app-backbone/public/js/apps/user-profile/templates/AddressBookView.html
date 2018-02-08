@@ -1,0 +1,133 @@
+<style>
+    .well {
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        padding: 15px;
+    }
+
+    .address-book-panel p {
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+
+    footer {
+        margin-top: 50px
+    }
+
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <br/>
+            <div class="list-group">
+                <a href="/userprofile" class="list-group-item">Profile</a>
+                <a href="/userprofile/addressbook" class="list-group-item">Address Book</a>
+                <a href="/wishlists" class="list-group-item">Wishlists</a>
+                <a href="/userprofile/orderhistory" class="list-group-item">Order History</a>
+                <a href="/userprofile/paymentoptions" class="list-group-item">Payment Options</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="general-form">
+                <h2>Address Book</h2>
+                <p>Limited to 10 entries</p>
+
+                <form id="addressBookForm">
+                    <div class="form-group">
+                        <input type="text" name="addressLine1" id="addressLine1" placeholder="Address Line 1"
+                               required value="{{address.addressLine1}}">
+                        <small id="erroraddress1" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="addressLine2" id="addressLine2" placeholder="Address Line 2"
+                               required="" value="{{address.addressLine2}}">
+                        <small id="erroraddress2" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="countryBean" class="form-control" name="countryBean">
+                            <option value="" selected disabled hidden>Select Country</option>
+
+                            {{#each countryModel}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+
+                        <small class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <select id="stateBean" class="form-control" name="stateBean" style="display: none;">
+                            <option value="" selected disabled hidden>Select State</option>
+                            {{#each stateModel}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="city" id="city" placeholder="Enter your City" required=""
+                               value="{{address.city}}">
+                        <small id="errorcity" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="zipcode" id="zipcode" placeholder="Zip Code" required=""
+                               value="{{address.zipcode}}">
+                        <small id="errorzipcode" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
+                               required="" value="{{address.phoneNumber}}">
+                        <small id="errorphoneNumber" class="text-danger"></small>
+                    </div>
+
+                    <div class="checkbox">
+                        <label for="isDefault">
+                            <input type="checkbox" name="isDefault" id="isDefault"
+                                   required="" {{bindAttr value="address.isDefault" }} {{checkDefault
+                                    address.isDefault}}>Default
+                        </label>
+                        <small id="errorphoneNumber" class="text-danger"></small>
+                    </div>
+
+                    {{#if address.editMode}}
+                        <button id="save" type="button" class="btn btn-default">Save</button>
+                    {{else}}
+                        <button id="submit" type="button" class="btn btn-default">Add</button>
+                    {{/if}}
+
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="general-form">
+                <h2>Shipping Addresses</h2>
+                <div class="row" style="height: 411px;overflow-y: auto;padding-top: 10px;">
+                    {{#each addresses}}
+                        {{#if this}}
+                            <div class="col-sm-6">
+                                <div class="panel {{#if
+                                        isDefault}}panel-success {{else}} panel-default{{/if}} address-book-panel">
+                                    <div class="panel-heading">Address {{inc @index}}</div>
+                                    <div class="panel-body addressId" id="{{id}}">
+                                        <p>{{addressLine1}}</p>
+                                        <p>{{addressLine2}}</p>
+                                        <p>{{city}} {{stateBean.name}} {{zipcode}}</p>
+                                        <p>{{phoneNumber}}</p>
+                                        <a href="javascript:void(0)" id="edit">Edit</a>&nbsp;&nbsp;
+                                        <a href="javascript:void(0)" id="remove">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{/if}}
+                    {{else}}
+                        No Data
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<!--component html goes here -->
+<!--product-details-->
+<div class="col-sm-5">
+    <div class="view-product">
+        <img src="{{itemImage}}" alt="" width="268" height="381" />
+    </div>
+
+    <div *ngIf="productData?.item.itemImages.length > 0" class="col-sm-12">
+        <div *ngFor="let image of productData?.item.itemImages">
+            <a class="col-sm-4" style="cursor: pointer;"><img src="{{image.imagePath}}" alt="" width="85" height="84" (click) = "changeImage(image.imagePath)"></a>
+        </div>
+    </div>
+
+</div>
+<div class="col-sm-7">
+    <div class="product-information">
+        <!--/product-information-->
+        <img src="/assets/images/product-details/new.jpg" class="newarrival" alt="" />
+        <h2>{{productData?.item.name}}</h2>
+        <p>Web ID: {{productData?.sku}}</p>
+        <div *ngIf="productData?.item.itemPrice.length > 0">
+            <span>
+                <span>US ${{productData?.item.itemPrice[0].price}}</span>
+            <!-- <label>Quantity:</label>
+                <input type="text" maxlength="4" value="1" /> -->
+            <app-add-to-cart *ngIf="productData?.item.isBuyable === 1" [itemid]="productData?.item.id"></app-add-to-cart>
+            </span>
+            <p *ngIf="productData?.item.isBuyable === 1"><b>Availability:</b> In Stock</p>
+            <p *ngIf="productData?.item.isBuyable === 0"><b>Availability:</b> Out Of Stock</p>
+        </div>
+        <p><b>Condition:</b> New</p>
+        <p><b>Category:</b> {{productData?.category.name}}</p>
+    </div>
+    <!--/product-information-->
+</div>
+<!--/product-details-->

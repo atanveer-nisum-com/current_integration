@@ -1,0 +1,106 @@
+<div class="container">
+        <div class="col-sm-4 col-sm-offset-1">
+<div class="general-form">
+    <h2>User Profile</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div>
+        <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" required>
+        <small *ngIf="formErrors.firstName" class="text-danger">
+          *{{ formErrors.firstName }}
+        </small>
+        
+      </div>
+      <div [hidden]="!edited">
+          <input type="text" formControlName="userId" >
+          <input type="text" formControlName="addressid" >
+          <input type="text" formControlName="countryid" >
+        </div>
+      <div>
+        <input type="text" formControlName="lastName" placeholder="Last Name" required>
+        <small *ngIf="formErrors.lastName" class="text-danger">
+          *{{ formErrors.lastName }}
+        </small>
+      </div>
+      <div>
+        <input type="email" formControlName="emailAddress" placeholder="Email Address" required>
+        <small *ngIf="formErrors.emailAddress" class="text-danger">
+          *{{ formErrors.emailAddress }}
+        </small>
+      </div>
+      <div>
+        <input type="text" formControlName="addressLine1" placeholder="Address Line 1" required>
+        <small *ngIf="formErrors.addressLine1" class="text-danger">
+          *{{ formErrors.addressLine1 }}
+        </small>
+      </div>
+  
+      <div>
+        <input type="text" formControlName="addressLine2" placeholder="Address Line 2" required>
+        <small *ngIf="formErrors.addressLine2" class="text-danger">
+          *{{ formErrors.addressLine2 }}
+        </small>
+      </div>
+      
+      
+      <!--<div *ngFor="let cc of userForm.controls.addresses.controls.countryBean; let ci=index">-->
+      <!--<div *ngIf="countryBean" formGroupName="countryBean">-->
+      <div>
+        <select #selectedCountry id="country" formControlName="country">
+          <option value="" selected disabled>Select country</option>
+          <option *ngFor="let c of countries$ | async" [value]="c.id">{{c.name}}</option>
+        </select>
+  
+      </div>
+      <div [hidden]="selectedCountry.value != usCountryId" >
+        <select id="states" formControlName="states">
+          <option value="" selected disabled>Select State</option>
+          <option *ngFor="let s of states$ | async" [value]="s.id">{{s.name}}</option>
+        </select>
+      </div>
+      <div>
+        <input type="text" formControlName="city" placeholder="Enter your City" required>
+        <small *ngIf="formErrors.city" class="text-danger">
+          *{{ formErrors.city }}
+        </small>
+      </div>
+      <div>
+        <input type="text" formControlName="postalCode" placeholder="Zip Code" required>
+        <small *ngIf="formErrors.postalCode" class="text-danger">
+          *{{ formErrors.postalCode }}
+        </small>
+      </div>
+      <div>
+        <input type="text" formControlName="phoneNumber" placeholder="Phone Number" required>
+        <small *ngIf="formErrors.phoneNumber" class="text-danger">
+          *{{ formErrors.phoneNumber }}
+        </small>
+      </div>
+      <!--</div>-->
+      <!--</div>-->
+      <div>
+        <input type="password" formControlName="currentPassword" placeholder="Current Password">
+        <small *ngIf="formErrors.currentPassword" class="text-danger">
+          *{{ formErrors.currentPassword }}
+        </small>
+      </div>
+      <div>
+        <input type="password" formControlName="newPassword" placeholder="New Password">
+        <small *ngIf="formErrors.newPassword" class="text-danger">
+          *{{ formErrors.newPassword }}
+        </small>
+      </div>
+
+      
+      <div>
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm New Password">
+        <small *ngIf="formErrors.confirmPassword" class="text-danger">
+          *Password Mismatch.
+        </small>
+      </div>
+      
+      <!--</div>-->
+      <button ng-click="onSubmit()" class="btn btn-default">Update</button>
+    </form>
+  </div>
+</div>
+</div>

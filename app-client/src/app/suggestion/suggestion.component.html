@@ -1,0 +1,14 @@
+<form class="form-horizontal" [formGroup]="myForm">
+    <input  ngui-auto-complete
+                    [(ngModel)]="keyword"
+                    formControlName="continent"
+                    [source]="searchData"
+                    [list-formatter]="autocompleListFormatter"
+                    value-property-name="id"
+                    loading-text="Loading...."
+                    display-property-name="name"
+                    placeholder="Find...."
+                    min-chars="3"
+                    (input)="reloadListInDelay($event)"
+                    class="form-control">
+</form>                   

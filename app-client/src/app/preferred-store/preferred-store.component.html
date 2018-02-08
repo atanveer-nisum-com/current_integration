@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="title text-center">
+    Prefered Store</h2>
+  <div class="row">
+
+    <div class="col-md-5 col-md-offset-4">
+      <ul class="user_info">
+        <li class="single_field">
+          <input #zip type="text" placeholder="Enter Zipcode">
+        </li>
+        <a class="btn btn-default check_out" style="margin-top:0px;" (click)="getStore(zip.value)">Search</a>
+      </ul>
+    </div>
+  </div>
+
+  <div class="single_field" *ngFor="let store of storeList" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="1000"
+    (scrolled)="onScroll()">
+    <div id="resultDiv" class="well-store">
+      <div class="col-md-9 text-right">
+      </div>
+      <div class="col-md-6">
+        <div id="orderId">Store Name : {{store.name}}</div>
+        <br>
+        <div id="orderDate">Store Address : {{store.address}}</div>
+        <br>
+      </div>
+      <div id="btnDiv">
+        <a id="btnOrderDetails" *ngIf="store.id != userStore.id" class="btn btn-info" (click)="sendPrefferedStore(store)">Make Default</a>
+        <button value="Default" id="btnOrderDetails" *ngIf="store.id == userStore.id" disabled class="btn btn-danger">Default</button>
+      </div>
+    </div>
+  </div>
+</div>

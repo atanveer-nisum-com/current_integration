@@ -1,0 +1,7 @@
+<!--component html goes here -->
+<p>View orders placed within:</p>
+<div>
+    <select #selectedFilter (change)="onOptionChanged(selectedFilter.value)">
+        <option *ngFor="let opt of viewOptions let isFirst = first; let i =index;" [class.selected]="isFirst" [value]="i">{{opt}}</option>
+      </select>
+</div>

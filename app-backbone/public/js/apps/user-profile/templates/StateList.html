@@ -1,0 +1,11 @@
+<select name="state"> 
+    {{#if stateBean}}
+        <option value = "{{stateBean.id}}" selected>{{stateBean.name}}</option>
+    {{else}}
+        <option value = empty selected disabled>select state</option>
+    {{/if}}
+    {{#each stateList}}
+            <option value = "{{this.id}}">{{this.name}}</option>
+    {{/each}}
+        <small id = "errorcountry" class = "text-danger"></small>
+</select>

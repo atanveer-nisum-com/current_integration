@@ -1,0 +1,146 @@
+<!--component html goes here -->
+<section id="cart_items">
+	<div class="container">
+		<!-- <div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a>Home</a></li>
+				<li class="active">Shopping Cart</li>
+			</ol>
+		</div> -->
+		<div class="table-responsive cart_info" *ngIf="order != null && order.orderItems.length == 0">
+			<div class="cart_menu not_found_text"> No item in cart</div>
+		</div>
+		<div class="table-responsive cart_info" *ngIf="order != null && order.orderItems.length > 0">
+			<table class="table table-condensed col-sm-12">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image col-sm-2">Item</td>
+						<td class="description col-sm-4"></td>
+						<td class="price col-sm-1">Price</td>
+						<td class="quantity col-sm-2">Quantity</td>
+						<td class="total col-sm-1">Total</td>
+						<td class="col-sm-1"></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let orderItem of order?.orderItems; let i = index;">
+						<td class="cart_product">
+							<a (click)='routeToDetail(orderItem.item.name)' style='cursor:pointer'><img src='{{ orderItem.item.itemImages[0].imagePath }}' alt="" height="120" width="120"></a>
+						</td>
+						<td class="cart_description">
+							<h4><a (click)='routeToDetail(orderItem.item.name)' style='cursor:pointer'>{{ orderItem.item.name }}</a></h4>
+							<p>{{ orderItem.item.code }}</p>
+						</td>
+						<td class="cart_price">
+							<p>${{ orderItem.price }}</p>
+						</td>
+						<td class="cart_quantity">
+							<div class="cart_quantity_button">
+								<a class="cart_quantity_up" style="cursor: pointer" (click)="increment(orderItem)"> + </a>
+								<input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="orderItem.quantity" size="2" (blur)="updateItem(orderItem.id,orderItem.quantity)"
+								 readonly>
+								<a class="cart_quantity_down" style="cursor: pointer" (click)="decrement(orderItem)"> - </a>
+							</div>
+						</td>
+						<td class="cart_total">
+							<p class="cart_total_price">{{ orderItem.subTotalPrice }} </p>
+						</td>
+						<td class="cart_delete">
+							<a class="cart_quantity_delete" style="cursor: pointer" (click)="remove(orderItem.id)"><i class="fa fa-times"></i></a>
+						</td>
+					</tr>
+					<tr *ngIf="isDisplay">
+						<td colspan="4">&nbsp;</td>
+						<td colspan="2">
+							<table class="table table-condensed total-result">
+								<tr>
+									<td>Cart Sub Total</td>
+									<td>${{subTotalPrice }}</td>
+								</tr>
+								<tr>
+									<td>Exo Tax</td>
+									<td>${{taxation}}</td>
+								</tr>
+								<tr class="shipping-cost">
+									<td>Shipping Cost</td>
+									<td>Free</td>
+								</tr>
+								<tr>
+									<td>Total</td>
+									<td><span>${{orderTotalPrice}}</span></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<ng-template #noData>
+				<div class="cart_menu"> No item in cart</div>
+			</ng-template>
+		</div>
+	</div>
+</section>
+<!--/#cart_items-->
+<section id="do_action" *ngIf="!isDisplay">
+	<div class="container">
+		<div class="heading">
+			<h3>What would you like to do next?</h3>
+			<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="chose_area">
+					<ul class="user_option">
+						<li><a tooltip="Coming Soon!">
+								<input disabled type="checkbox">
+								<label>Use Coupon Code</label>
+							</a></li>
+						<li><a tooltip="Coming Soon!">
+							<input disabled type="checkbox">
+							<label>Use Gift Voucher</label>
+						</a></li>
+						<li><a tooltip="Coming Soon!">
+							<input disabled type="checkbox">
+							<label>Estimate Shipping & Taxes</label>
+						</a></li>
+					</ul>
+					<ul class="user_info">
+						<li class="single_field">
+							<label>Country:</label>
+							<select>
+									<option>United States</option>
+							</select>
+
+						</li>
+						<li class="single_field">
+							<label>Region / State:</label>
+							<select [ngModel]="selectedTax" (ngModelChange)="onTaxChange($event)" name="sel3">
+								<option [ngValue]="i" *ngFor="let i of taxList">{{i.abbrv}}</option>
+							</select>
+
+						</li>
+						<li class="single_field zip-field"><a tooltip="Coming Soon!">
+							<label>Zip Code:</label>
+							<input disabled type="text">
+						</a></li>
+					</ul>
+					<!-- <a tooltip="Coming Soon!" class="btn btn-default update" >Get Quotes</a>
+					<a tooltip="Coming Soon!" class="btn btn-default check_out" >Continue</a> -->
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="total_area">
+					<ul>
+						<li>Cart Sub Total <span>${{subTotalPrice }}</span></li>
+						<li>Sales Tax <span>${{taxation}}</span></li>
+						<li>Shipping Cost <span>Free</span></li>
+						<li>Total <span>${{orderTotalPrice}}</span></li>
+					</ul>
+					<!-- <a class="btn btn-default update" href="">Update</a> -->
+					<a class="btn btn-default check_out" (click)="onStageCheckout();">Check Out</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--/#do_action-->

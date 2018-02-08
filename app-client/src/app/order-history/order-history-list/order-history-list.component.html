@@ -1,0 +1,24 @@
+<div id="resultDiv" class="well well-lg">
+  <div class="col-sm-6">
+    <div id="orderId">Order Id: {{order.id}}</div>
+    <br>
+    <div id="orderDate"> Order Date: {{order.createdAt * 1000 | date}} </div>
+    <br>
+    <i id="paymentType" class="fa fa-cc-paypal fa-2x" *ngIf="paymentType" title="Payment Type"></i>
+  </div>
+  <div class="col-sm-6 text-right">
+    <div id="orderStatus">Order Status: {{order.orderStatusTitle}}</div>
+    <br>
+    <div id="itemsCount">Total items: {{order.totalItem}}</div>
+    <br>
+    <div id="totalCost">Total cost: {{order.orderTotalPrice | currency:'USD':true}} </div>
+    <br>
+  </div>
+  <div id="btnDiv">
+    <input [hidden]="!isDisplay" *ngIf="isDisplay" type="button" id="{{order.id}}" value="Cancel Order" class="btn btn-danger"
+      (click)='cancelOrder(order.id)' /> &nbsp;
+    <a id="btnOrderDetails" class="btn btn-info" [routerLink]="['/order-history-detail', order.id]">Order Details</a>
+  </div>
+</div>
+
+<ng-template #elseBlock></ng-template>

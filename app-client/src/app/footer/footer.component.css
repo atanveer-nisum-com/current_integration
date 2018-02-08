@@ -1,0 +1,4 @@
+/* overloading the same class for less margin to bottom */
+.footer-widget {
+    margin-bottom: 38px;
+}

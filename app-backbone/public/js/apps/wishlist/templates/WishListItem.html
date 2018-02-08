@@ -1,0 +1,21 @@
+{{#each this.items}}   
+<tr id="wishItem-{{@index}}" data-id="{{item.id}}">
+    <td style="margin-bottom:-5px; margin-top:-5px" class="cart_product">
+        <img src="{{item.defaultImage}}" width="12%">
+    </td>
+    <td style="margin-bottom:-5px; margin-top:-5px" class="cart_description">
+        <p style="margin-bottom:-5px; margin-top:-5px"><a href="products/{{id}}">{{item.name}}</a></p>
+    </td>
+    <td class="cart_price">
+        <p>{{item.itemPrice.0.price}}</p>
+        {{#if discount}}
+           <h5 id="{{item.id}}" class="text-danger">Sale Price: ${{discount}}</h5>
+         {{/if}}
+    </td>
+    <td style="margin-bottom:-5px; margin-top:-5px">
+        <a style="cursor: pointer; margin-bottom:-5px; margin-top:-5px;" class="cart_quantity_delete">
+            <div id="remove"><i class="fa fa-times"></i>Remove</div>
+        </a>
+    </td>
+ {{/each}}
+ </tr>

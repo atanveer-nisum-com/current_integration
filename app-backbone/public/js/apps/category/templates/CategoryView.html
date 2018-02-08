@@ -1,0 +1,23 @@
+<div class="left-sidebar">
+  <h2>Category</h2>
+  <ul class="tab" id="accordian">
+    {{#each this}}
+    <li>
+      <input id="{{this.id}}" type="radio" name="accord" class="accordian-radio">
+      <label for="{{this.id}}" class="accord-radio-label text-uppercase">
+        {{this.name}}
+        <i class="fa fa-plus"></i>
+      </label>
+      <ul class="tab-content">
+        {{#each this.subCategories}}
+        <li class="text-uppercase"><a href="/products/category/{{../name}}-{{name}}">{{name}}</a></li>
+        {{/each}}
+      </ul>
+      {{/each}}
+    </li>
+  </ul>
+</div>
+<div class="shipping text-center">
+  <!--shipping-->
+  <img src="/images/home/shipping.jpg" alt="ad"/>
+</div>

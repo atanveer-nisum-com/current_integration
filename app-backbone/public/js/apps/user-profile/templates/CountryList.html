@@ -1,0 +1,6 @@
+<select id="country" name="country">
+        <option value = "{{cBean.id}}"selected>{{cBean.name}}</option>
+        {{#each proModel}}
+            <option value = "{{this.id}}">{{this.name}}</option>
+        {{/each}}
+</select>

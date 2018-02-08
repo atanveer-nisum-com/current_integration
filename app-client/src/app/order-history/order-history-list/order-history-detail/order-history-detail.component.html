@@ -1,0 +1,39 @@
+<div class="container order_history_detail">
+  <button type="button" (click)="goBack()" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Back</button>
+  <h2 class="title text-center">Order Items Detail</h2>
+  <div class="panel panel-warning">
+    <div class="panel-body">
+      <p class="col-sm-4 text-warning"><strong>Order Id : {{order?.id}}</strong></p>
+      <p class="col-sm-4 text-warning"><strong>Order Date : {{order?.createdAt * 1000 | date}}</strong></p>
+      <p class="col-sm-4 text-warning"><strong>Order Status : {{order?.orderStatusTitle}}</strong></p>
+      <p class="col-sm-4 text-warning"><strong>No. of Items : {{order?.totalItem}}</strong></p>
+      <p class="col-sm-4 text-warning"><strong>Total cost : {{ order?.orderTotalPrice | currency:'USD':true }}</strong></p>
+      <p class="col-sm-4 text-warning"><strong>Payment Type : {{ order?.transaction.paymentType.name }}</strong></p>
+    </div>
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let orderDetail of orderItems">
+        <div class="list-group-item-text">
+          <div class="row">
+            <img src='{{ orderDetail.item.itemImages[0].imagePath }}' alt="{{orderDetail.item.name}}" class="img-responsive col-sm-2"
+              height="120" width="120" />
+            <div class="col-sm-10">
+              <a (click)='routeToProductPage(orderDetail.item.name)' style='cursor:pointer' class="list-group-item-heading">
+                <h4>{{ orderDetail.item.name }}</h4>
+              </a>
+              <div class="row">
+                <div class="col-sm-9">
+                  <p>SKU: {{ orderDetail?.item?.code }}</p>
+                </div>
+                <div class="col-sm-3">
+                  <p>Quantity: {{orderDetail.quantity}}</p>
+                  <p>Item Price: {{ orderDetail.subTotalPrice | currency:'USD':true }}</p>
+                  <app-add-to-cart [itemid]="orderDetail?.item.id" [caption]="'Buy Again'"></app-add-to-cart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

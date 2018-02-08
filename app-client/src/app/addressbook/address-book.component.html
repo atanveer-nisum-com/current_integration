@@ -1,0 +1,107 @@
+<section class="container"> <!--main address book container-->
+  <h2 class="title text-center">Address Book</h2>
+
+  <div class="col-md-5  general-form" *ngIf="showForm"> <!--forms container-->
+    <h3 class="title text-center">{{formType}}</h3>
+    <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="id" />
+
+      <div>
+        <input type="text" formControlName="addressLine1" placeholder="Address Line 1">
+        <small *ngIf="formErrors.addressLine1" class="text-danger">
+          *{{ formErrors.addressLine1 }}
+        </small>
+      </div>
+
+      <div>
+        <input type="text" formControlName="addressLine2" placeholder="Address Line 2">
+      </div>
+
+      <div>
+        <select #selectedCountry id="country" formControlName="countryBean">
+          <option value="" selected disabled>Select country</option>
+          <option *ngFor="let c of countries$ | async" [value]="c.id">{{c.name}}</option>
+        </select>
+        <small *ngIf="formErrors.country" class="text-danger">
+          *{{ formErrors.country }}
+        </small>
+      </div>
+
+      <div [hidden]="selectedCountry.value != usCountryId">
+        <select id="states" formControlName="stateBean">
+          <option value="" selected disabled>Select State</option>
+          <option *ngFor="let s of states$ | async" [value]="s.id">{{s.name}}</option>
+        </select>
+      </div>
+
+      <div>
+        <input type="text" formControlName="city" placeholder="Enter your city">
+      </div>
+
+      <div>
+        <input type="text" formControlName="zipcode" placeholder="Zip Code">
+        <small *ngIf="formErrors.zipcode" class="text-danger">
+          *{{ formErrors.zipcode }}
+        </small>
+      </div>
+
+      <div>
+        <input type="text" formControlName="phoneNumber" placeholder="Phone Number">
+        <small *ngIf="formErrors.phoneNumber" class="text-danger">
+          *{{ formErrors.phoneNumber }}
+        </small>
+      </div>
+
+      <div>
+        <input type="checkbox" formControlName="isDefault"/> Make Default
+      </div>
+
+      <button type="submit" class="btn btn-primary">{{isEditForm ? 'Update' : 'Add'}}</button>
+
+    </form>
+
+  </div> <!-- end forms container-->
+
+  <div [ngClass]="'col-md-' + (showForm ? 7 : 12)"> <!--contains addresses-->
+
+    <div class="row"> <!--new address button container-->
+      <button class=" btn btn-primary pull-right" style="margin-top: -4px;" (click)="showAddNewShippingAddressForm()">New Address</button>
+    <h5>Max Address 10</h5>
+    </div> <!-- end new address button container-->
+
+    <div class="row">
+      <table class="table table-striped" style="margin-top: 21px;">
+        <!-- <thead>
+        <tr>
+          <span *ngIf="limitExced" >Addresses Limit Reached</span>
+          <th colspan='3'>Max Address 10 </th>
+        </tr>
+        </thead> -->
+        <tbody>
+        <tr *ngFor="let address of addresses; trackBy:address?.id;" >
+          <td>
+              <div [ngClass]="{'default-address': address.isDefault == 1}">
+                <span *ngIf="address.stateBean"  >{{address.addressLine1}}, {{address.addressLine2 }}, {{address.city}}, {{address.stateBean?.name}}, {{address.zipcode}}, {{address.countryBean.name}}</span>
+                <span *ngIf="!address.stateBean">{{address.addressLine1}}, {{address.addressLine2 }}, {{address.city}}, {{address.zipcode }}, {{address.countryBean.name}}</span>
+                <i *ngIf="address.isDefault == 1" class="fa fa-check" title="Default Address"></i>
+              </div>
+          </td>
+          <td>
+            <div class="pull-right">
+              <a (click)="showEditShippingAddressForm(address)"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+              <a (click)="deleteShippingAddress(address.id)"><i class="fa fa-times fa-lg"></i></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!addresses || addresses.length == 0" >Address Book Is Empty</div>
+    </div>
+
+  </div> <!-- end contains addresses-->
+
+  
+  <!--<p></p>-->
+
+</section> <!--main address book container-->
+

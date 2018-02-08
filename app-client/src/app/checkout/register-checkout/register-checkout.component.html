@@ -1,0 +1,172 @@
+<!--component html goes here -->
+
+
+<div class="shopper-informations general-form">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="shopper-info">
+        <p>Shopper Information</p>
+        <form [formGroup]="userForm">
+          <div>
+            <input type="text" formControlName="firstName" placeholder="First Name">
+            <small *ngIf="formErrors.firstName" class="text-danger">
+                            *{{ formErrors.firstName }}
+                          </small>
+          </div>
+          <div>
+            <input type="text" formControlName="lastName" placeholder="Last Name">
+            <small *ngIf="formErrors.lastName" class="text-danger">
+                            *{{ formErrors.lastName }}
+                          </small>
+          </div>
+          <div>
+            <input type="email" formControlName="emailAddress" placeholder="Email Address">
+            <small *ngIf="formErrors.emailAddress" class="text-danger">
+                            *{{ formErrors.emailAddress }}
+                          </small>
+          </div>
+          <div *ngIf="user === undefined">
+            <div>
+              <input type="password" formControlName="password" placeholder="Password">
+              <small *ngIf="formErrors.password" class="text-danger">
+                              *{{ formErrors.password }}
+                            </small>
+            </div>
+            <div>
+              <input type="password" formControlName="cPassword" placeholder="Confirm Password">
+              <small *ngIf="formErrors.cPassword" class="text-danger">
+                              *Password Mismatch.
+                            </small>
+            </div>
+          </div>
+          <div>
+            <input type="text" formControlName="addressLine1" placeholder="Address Line 1">
+            <small *ngIf="formErrors.address" class="text-danger">
+                            *{{ formErrors.address }}
+                          </small>
+          </div>
+
+          <div>
+            <input type="text" formControlName="addressLine2" placeholder="Address Line 2">
+            <small *ngIf="formErrors.address" class="text-danger">
+                            *{{ formErrors.address }}
+                          </small>
+          </div>
+
+          <div>
+            <select #selectedCountryUser id="country" formControlName="country">
+                            <option value="" selected disabled>Select country</option>
+                            <option *ngFor="let c of countries$ | async" [value]="c.id">{{c.name}}</option>
+                          </select>
+
+          </div>
+          <div [hidden]="selectedCountryUser.value != usCountryId">
+            <select id="states" formControlName="states">
+                            <option value="" selected disabled>Select State</option>
+                            <option *ngFor="let s of states$ | async" [value]="s.id">{{s.name}}</option>
+                          </select>
+          </div>
+          <div>
+            <input type="text" formControlName="city" placeholder="Enter your city">
+          </div>
+          <div>
+            <input type="text" formControlName="postalCode" placeholder="Zip Code">
+            <small *ngIf="formErrors.postalCode" class="text-danger">
+                            *{{ formErrors.postalCode }}
+                          </small>
+          </div>
+          <div>
+            <input type="text" formControlName="phoneNumber" placeholder="Phone Number">
+            <small *ngIf="formErrors.phoneNumber" class="text-danger">
+                            *{{ formErrors.phoneNumber }}
+                          </small>
+          </div>
+          <!--</div>-->
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-4 clearfix">
+      <div class="bill-to">
+        <p>Ship To</p>
+        <div>
+          <div class="[ form-group ]" *ngIf="user !== undefined; else elseBlock" (change)="fillShippingAddress($event)">
+            <select id="test">
+                  <option value="null" disabled>Select Your Shipping Address</option> 
+                  <option *ngFor="let add of addresses; let i = index; let first = first;" [selected]="first" [value] = "add | json">{{add.addressLine1}} , {{add.countryBean.name}}</option>
+                  <option value="addNew">Add New Address</option>
+            </select>
+          </div>
+          <ng-template #elseBlock>
+            <div class="[ form-group ]">
+              <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" (change)="sameAddress($event)"
+              />
+              <div class="[ btn-group ]">
+                <label for="fancy-checkbox-default" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                        <span> </span>
+                    </label>
+                <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
+                        Same As Billing
+                    </label>
+              </div>
+            </div>
+          </ng-template>
+          <form [formGroup]="shipToForm">
+
+            <div>
+              <input type="text" formControlName="addressLine1" placeholder="Address Line 1">
+              <small *ngIf="formErrors.address" class="text-danger">
+                              *{{ formErrors.address }}
+                            </small>
+            </div>
+
+            <div>
+              <input type="text" formControlName="addressLine2" placeholder="Address Line 2">
+              <small *ngIf="formErrors.address" class="text-danger">
+                              *{{ formErrors.address }}
+                            </small>
+            </div>
+            <div>
+              <select #selectedCountry id="country" formControlName="country">
+                              <option value="" selected disabled>Select country</option>
+                              <option *ngFor="let c of countries$ | async" [value]="c.id">{{c.name}}</option>
+                            </select>
+
+            </div>
+            <div [hidden]="selectedCountry.value != usCountryId">
+              <select id="states" formControlName="states">
+                              <option value="" selected disabled>Select State</option>
+                              <option *ngFor="let s of states$ | async" [value]="s.id">{{s.name}}</option>
+                            </select>
+            </div>
+            <div>
+              <input type="text" formControlName="city" placeholder="Enter your city">
+              <small *ngIf="formErrors.city" class="text-danger">
+                  </small>
+
+            </div>
+
+            <div>
+              <input type="text" formControlName="shipPostalCode" placeholder="Zip Code">
+              <small *ngIf="formErrors.shipPostalCode" class="text-danger">
+                              *{{ formErrors.shipPostalCode }}
+                            </small>
+            </div>
+            <div>
+              <input type="text" formControlName="phoneNumber" placeholder="Phone Number">
+              <small *ngIf="formErrors.phoneNumber" class="text-danger">
+                              *{{ formErrors.phoneNumber }}
+                            </small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="order-message">
+        <p>Shipping Order</p>
+        <textarea name="message" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

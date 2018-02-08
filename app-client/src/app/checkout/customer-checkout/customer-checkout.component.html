@@ -1,0 +1,30 @@
+<!--component html goes here -->
+<div class="checkout-options">
+    <div *ngIf="userData === undefined; else elseblock">
+        <h3>New User</h3>
+        <p>Checkout options</p>
+        <ul class="nav">
+            <li>
+                <label><input type="radio" name="radio" (click)="RegisterCheckoutComp()" checked> Register Account</label>
+            </li>
+            <li>
+                <label><input type="radio" name="radio" (click)="GuestCheckOutComp()"> Guest Checkout</label>
+            </li>
+            <li>
+                <a [routerLink]="['/home']"><i class="fa fa-times"></i>Cancel</a>
+            </li>
+        </ul>
+    </div>
+    <ng-template #elseblock>
+        <h3>Welcome {{userData.firstName}} {{userData.lastName}}</h3>
+    </ng-template>
+</div>
+<!--/checkout-options-->
+
+<div class="register-req">
+    <p>Please enter your information for checkout process</p>
+</div>
+<!--/register-req-->
+
+
+<app-dynamic [componentData]="componentData"></app-dynamic>
